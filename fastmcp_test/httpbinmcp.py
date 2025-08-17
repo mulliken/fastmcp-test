@@ -1,6 +1,6 @@
 import anyio
 from fastmcp import FastMCP, Client
-from httpbinconnector import HTTPBinConnector
+from .httpbinconnector import HTTPBinConnector
 
 server = FastMCP('httpbinmcp')
 connector = HTTPBinConnector('httpbinconnector')

@@ -1,4 +1,4 @@
-from base_connector import BaseMCPConnector
+from .base_connector import BaseMCPConnector
 
 class HTTPBinConnector(BaseMCPConnector):
     def __init__(self, service: str):

@@ -2,7 +2,7 @@ name: Deploy Pyodide App
 
 on:
   push:
-    branches: [ "main" ]  # or "master", depending on your default branch
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -16,6 +16,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Build fastmcp_test wheel
+        run: |
+          cd fastmcp_test
+          uv build --wheel --no-cache -o ../app/wheels
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -27,4 +40,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
