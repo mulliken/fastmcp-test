@@ -1,0 +1,25 @@
+stages:
+  - build
+  - deploy
+
+build-wheel:
+  stage: build
+  image: python:3.11
+  script:
+    - pip install build
+    - python -m build fastmcp_test
+    - cp fastmcp_test/dist/*.whl app/
+  artifacts:
+    paths:
+      - app/
+
+pages:
+  stage: deploy
+  script:
+    - mv app public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+

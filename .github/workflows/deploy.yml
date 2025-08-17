@@ -1,0 +1,34 @@
+name: Deploy Pyodide App
+
+on:
+  push:
+    branches:
+      - main    # or "master", depending on your default branch
+  workflow_dispatch:      # lets you trigger manually too
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload app folder
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: app   # serve only /app folder
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
