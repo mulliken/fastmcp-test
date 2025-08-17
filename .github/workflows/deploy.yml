@@ -26,8 +26,7 @@ jobs:
 
       - name: Build fastmcp_test wheel
         run: |
-          cd fastmcp_test
-          uv build --wheel --no-cache -o ../app/wheels
+          uv build --wheel --no-cache -o ./app/wheels
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
